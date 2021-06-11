@@ -2,8 +2,9 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+const host = process.env.hostname || "localhost";
 const { MongoClient } = require("mongodb");
-const url = "mongodb://localhost:27017";
+const url = "mongodb://"+process.env.username+":"+process.env.password+"@"+process.env.host+":27017";
 
 const client = new MongoClient(url, {
     useNewUrlParser: true,
