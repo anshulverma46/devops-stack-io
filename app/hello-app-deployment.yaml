@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-app
+spec:
+  selector:
+    matchLabels:
+      run: hello-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: hello-app
+    spec:
+      containers:
+      - name: hello-app
+        image: hello-app:latest
+        imagePullPolicy: Always
+        envFrom:
+        - secretRef: 
+            name: hello-secret
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m

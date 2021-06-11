@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-mongo
+  labels:
+    run: hello-mongo
+spec:
+  ports:
+  - port: 27017
+    targetPort: 27017
+  selector:
+    run: hello-mongo

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-mongo
+spec:
+  selector:
+    matchLabels:
+      run: hello-mongo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: hello-mongo
+    spec:
+      containers:
+      - name: hello-mongo
+        image: hello-app:latest
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: dbpath
+          mountPath: /data/db
+        ports:
+        - containerPort: 27017
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
+    volumes:
+      - name: dbpath
+        hostPath:
+          path: /data/db  
